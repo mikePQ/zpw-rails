@@ -1,0 +1,42 @@
+<%= form_with(model: @event, local: true) do |form| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% @event.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label "Artysta" %>
+    <%= form.text_field :artist, id: :event_artist %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Krótki opis" %>
+    <%= form.text_field :description, id: :event_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Cena minimalna" %>
+    <%= form.text_field :price_low, id: :event_price_low %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Cena maksymalna" %>
+    <%= form.text_field :price_high, id: :event_price_high %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Data" %>
+    <%= form.date_field :event_date, id: :event_event_date %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', events_path %>
