@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+<p id="message"><%= flash[:message] %></p>
+<p>
+  <strong>Artysta:</strong>
+  <%= @event.artist %>
+</p>
+
+<p>
+  <strong>Opis:</strong>
+  <%= @event.description %>
+</p>
+
+<p>
+  <strong>Cena minimalna:</strong>
+  <%= @event.price_low %>
+</p>
+
+<p>
+  <strong>Cena maksymalna:</strong>
+  <%= @event.price_high %>
+</p>
+
+<p>
+  <strong>Data:</strong>
+  <%= @event.event_date %>
+</p>
+
+<%= link_to 'Back', events_path %>
