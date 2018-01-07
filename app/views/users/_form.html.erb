@@ -1,0 +1,36 @@
+<%= form_with(model: user, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2>Formularz rejestracyjny zawiera błędy:</h2>
+
+      <ul>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-wrapper offset-md-2 col-md-8">
+    <div class="field row">
+      <div class="col-md-2">
+        <%= form.label :email %>
+      </div>
+      <div class="col-md-10">
+        <%= form.text_field :email, id: :user_email, class: "w-100" %>
+      </div>
+    </div>
+
+    <div class="field row">
+      <div class="col-md-2">
+        <%= form.label "Hasło" %>
+      </div>
+      <div class="col-md-10">
+        <%= form.password_field :password, id: :user_password, class: "w-100" %>
+      </div>
+    </div>
+    <div class="actions float-right">
+      <%= form.submit "Zarejestruj się", class: "btn btn-warning" %>
+    </div>
+  </div>
+<% end %>

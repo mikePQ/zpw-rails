@@ -1,0 +1,29 @@
+<h1>Zaloguj się</h1>
+
+<div class="row">
+  <div class="col-md-6 offset-3">
+    <%= form_for(:session, url: login_path) do |f| %>
+
+      <div class="row top-mg-15">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
+      </div>
+
+      <div class="row top-mg-15">
+        <%= f.label "Hasło" %>
+        <%= f.password_field :password, class: 'form-control' %>
+      </div>
+
+      <div class="row top-mg-50">
+        <div class="col-md-8">
+          <p class="top-mg-5">Nie masz konta? <%= link_to "Zarejestruj się!", "/signup", class: "text-warning" %></p>
+        </div>
+        <div class="offset-1 col-md-3">
+          <%= f.submit "Zaloguj się", class: "btn btn-warning w-100" %>
+        </div>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>

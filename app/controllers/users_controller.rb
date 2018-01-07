@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         log_in @user
-        format.html {redirect_to @user, notice: 'Rejestracja zakończona pomyślnie'}
+        format.html {redirect_to '/', notice: 'Rejestracja zakończona pomyślnie'}
       else
         format.html {render :new}
       end
