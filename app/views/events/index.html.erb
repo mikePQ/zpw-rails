@@ -6,11 +6,7 @@
       <th class="w-50">Artysta</th>
       <th class="w-25">Data</th>
       <th class="w-25">Miejsca</th>
-      <% if current_user&.admin? %>
-        <th colspan="2"></th>
-      <% else %>
-        <th colspan="1"></th>
-      <% end %>
+      <th colspan="1"></th>
     </tr>
     </thead>
 
@@ -21,9 +17,6 @@
         <td><%= format_date event.event_date %></td>
         <td><%= event.tickets.length %></td>
         <td><%= link_to 'Szczegóły', event %></td>
-        <% if current_user&.admin? %>
-          <td><%= link_to 'Usuń', event, method: :delete, data: {confirm: 'Czy jesteś pewien?'} %></td>
-        <% end %>
       </tr>
     <% end %>
     </tbody>
