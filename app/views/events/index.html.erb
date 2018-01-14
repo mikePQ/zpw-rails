@@ -1,7 +1,38 @@
-<h1> Wszystkie wydarzenia</h1>
-<ul>
-  <% for event in @events %>
-    <li><%= link_to event.artist, event %></li>
-  <% end %>
-</ul>
-<%= link_to 'Nowe ogłoszenie', new_event_path %>
+<h1>Wydarzenia</h1>
+<div class="table-responsive top-mg-50">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th class="w-50">Artysta</th>
+      <th class="w-25">Data</th>
+      <th class="w-25">Miejsca</th>
+      <% if current_user&.admin? %>
+        <th colspan="2"></th>
+      <% else %>
+        <th colspan="1"></th>
+      <% end %>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.artist %></td>
+        <td><%= format_date event.event_date %></td>
+        <td><%= event.tickets.length %></td>
+        <td><%= link_to 'Szczegóły', event %></td>
+        <% if current_user&.admin? %>
+          <td><%= link_to 'Usuń', event, method: :delete, data: {confirm: 'Czy jesteś pewien?'} %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<% if logged_in? %>
+  <button class="btn btn-warning">
+    <%= link_to 'Nowe ogłoszenie', new_event_path %>
+  </button>
+<% end %>

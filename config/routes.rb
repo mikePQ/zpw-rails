@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root :to => 'pages#home'
+
   resources :events, :only => [:index, :new, :create, :show]
   resources :users, :only => [:new, :create]
   resources :tickets
