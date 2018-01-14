@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   resources :tickets
 
   get '/signup', to: 'users#new'
-  get '/charge', to: 'pages#charge'
+  get '/charge', to: 'users#charge'
+  post '/charge', to: 'users#charged'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'

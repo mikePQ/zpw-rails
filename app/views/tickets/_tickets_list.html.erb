@@ -1,35 +1,39 @@
 <h1>Bilety</h1>
 
-<table>
-  <thead>
-  <tr>
-    <th>Imię i nazwisko</th>
-    <th>Id miejsca</th>
-    <th>Adres</th>
-    <th>Cena</th>
-    <th>Email</th>
-    <th>Telefon</th>
-    <th colspan="3"></th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% tickets.each do |ticket| %>
+<div class="top-mg-50">
+  <table class="table table-striped">
+    <thead class="thead-dark">
     <tr>
-      <td><%= ticket.name %></td>
-      <td><%= ticket.seat_id_seq %></td>
-      <td><%= ticket.address %></td>
-      <td><%= ticket.price %></td>
-      <td><%= ticket.email_address %></td>
-      <td><%= ticket.phone %></td>
-      <td><%= link_to 'Szczegóły', ticket %></td>
-      <td><%= link_to 'Edytuj', edit_ticket_path(ticket) %></td>
-      <td><%= link_to 'Usuń', ticket, method: :delete, data: {confirm: 'Czy jesteś pewien?'} %></td>
+      <th>Imię i nazwisko</th>
+      <th>Id miejsca</th>
+      <th>Adres</th>
+      <th>Cena</th>
+      <th>Email</th>
+      <th>Telefon</th>
+      <th colspan="3"></th>
     </tr>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+    <% tickets.each do |ticket| %>
+      <tr>
+        <td><%= ticket.name %></td>
+        <td><%= ticket.seat_id_seq %></td>
+        <td><%= ticket.address %></td>
+        <td><%= ticket.price %></td>
+        <td><%= ticket.email_address %></td>
+        <td><%= ticket.phone %></td>
+        <td><%= link_to 'Szczegóły', ticket %></td>
+        <td><%= link_to 'Edytuj', edit_ticket_path(ticket) %></td>
+        <td><%= link_to 'Usuń', ticket, method: :delete, data: {confirm: 'Czy jesteś pewien?'} %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
 
 <br>
 
-<%= link_to 'Nowy bilet', new_ticket_path %>
+<button class="btn btn-warning">
+  <%= link_to 'Nowy bilet', new_ticket_path %>
+</button>

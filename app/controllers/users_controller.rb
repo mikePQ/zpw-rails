@@ -52,6 +52,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def charge
+    @charge = AccountCharge.new
+  end
+
+  def charged
+    print @charge
+
+    respond_to do |format|
+      format.html {redirect_to '/', notice: 'Konto zostało zasilone środkami'}
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_user
