@@ -1,18 +1,23 @@
 <h1>Doładuj konto</h1>
-<%= form_with(model: @charge, local: true, url: '/charge', method: 'post') do |form| %>
-  <% if @charge.errors.any? %>
-    <div id="error_explanation">
-      <h2>Formularz rejestracyjny zawiera błędy:</h2>
 
-      <ul>
-        <% @charge.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="top-mg-50">
+  <h3>Stan konta: $<%= current_user.balance %></h3>
+</div>
 
-  <div class="form-wrapper">
+<div class="form-wrapper">
+  <%= form_with(model: @charge, local: true, url: '/charge', method: 'post') do |form| %>
+    <% if @charge.errors.any? %>
+      <div id="error_explanation">
+        <h2>Formularz rejestracyjny zawiera błędy:</h2>
+
+        <ul>
+          <% @charge.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <div class="field row">
       <div class="col-md-2">
         <%= form.label "Kwota doładowania" %>
@@ -33,5 +38,5 @@
     <div class="actions float-right">
       <%= form.submit "Zatwierdź", class: "btn btn-warning" %>
     </div>
-  </div>
-<% end %>
+    </div>
+  <% end %>

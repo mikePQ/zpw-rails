@@ -57,10 +57,13 @@ class UsersController < ApplicationController
   end
 
   def charged
-    print @charge
-
-    respond_to do |format|
-      format.html {redirect_to '/', notice: 'Konto zostało zasilone środkami'}
+    @user = current_user
+    new_balance = @user.balance + params[:account_charge][:amount].to_d
+    print new_balance
+    if @user.update_attribute(:balance, new_balance)
+      respond_to do |format|
+        format.html {redirect_to '/', notice: 'Konto zostało zasilone środkami'}
+      end
     end
   end
 

@@ -1,37 +1,58 @@
-<p id="notice"><%= notice %></p>
 <p id="message"><%= flash[:message] %></p>
-<p>
+<h6>
   <strong>Artysta:</strong>
   <%= @event.artist %>
-</p>
+</h6>
 
-<p>
+<h6>
   <strong>Opis:</strong>
   <%= @event.description %>
-</p>
+</h6>
 
-<p>
+<h6>
   <strong>Cena minimalna:</strong>
   <%= @event.price_low %>
-</p>
+</h6>
 
-<p>
+<h6>
   <strong>Cena maksymalna:</strong>
   <%= @event.price_high %>
-</p>
+</h6>
 
-<p>
+<h6>
   <strong>Data:</strong>
   <%= @event.event_date %>
-</p>
+</h6>
 
 <div class="top-mg-50">
-  <%= render "tickets/tickets_list", tickets: @event.tickets %>
+  <% width = 100 / @event.seats_columns %>
+  <% for i in 1..@event.seats_rows do %>
+    <div class="row">
+      <% for j in 1..@event.seats_columns do %>
+        <% seat = @event.get_seat(i, j) %>
+        <button
+        class="btn
+          <%= @event.is_available(seat) ? 'btn-danger' : 'btn-success' %>"
+        style="padding: 15px 0; width : <%= width  %>%;
+            <% if j < @event.seats_columns %>
+            border-right: 1px solid #fff;
+            <% end %>
+            <% if i < @event.seats_rows %>
+            border-bottom: 1px solid #fff;
+          <% end %>">
+
+          <%= link_to seat, new_ticket_path(:seat_id_seq => seat, :event_id => @event.id), class: "btn text-white w-100" %>
+        </button>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
-<div class="top-mg-50 new-ticket">
-  <%= render "tickets/new_ticket", ticket: Ticket.new(:event_id => @event.id) %>
-</div>
+<% if current_user&.admin? %>
+  <div class="top-mg-50">
+    <%= render "tickets/tickets_list", tickets: @event.tickets %>
+  </div>
+<% end %>
 
 <button class="btn btn-warning top-mg-50">
   <%= link_to 'Powrót', events_path %>

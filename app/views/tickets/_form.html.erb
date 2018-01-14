@@ -21,14 +21,9 @@
       </div>
     </div>
 
-    <div class="field row">
-      <div class="col-md-2">
-        <%= form.label "Id miejsca" %>
-      </div>
-      <div class="col-md-10">
-        <%= form.text_field :seat_id_seq, id: :ticket_seat_id_seq, class: "w-100" %>
-      </div>
-    </div>
+    <% if ticket.seat_id_seq? %>
+      <%= form.hidden_field :seat_id_seq, id: :ticket_seat_id_seq, value: ticket.seat_id_seq %>
+    <% end %>
 
     <div class="field row">
       <div class="col-md-2">
@@ -68,20 +63,10 @@
 
     <% if ticket.event_id? %>
       <%= form.hidden_field :event_id, id: :ticket_event_id, value: ticket.event_id %>
-    <% else %>
-      <div class="field row">
-        <div class="col-md-2">
-          <%= form.label "Wydarzenie" %>
-        </div>
-        <div class="col-md-10">
-          <%= form.collection_select :event_id, Event.all, :id, :name, {}, {:class => 'form-control w-100'} %>
-        </div>
-      </div>
-
     <% end %>
 
     <div class="row actions float-right">
-      <%= form.submit "Utwórz bilet", class: "btn btn-warning" %>
+      <%= form.submit "Kup bilet", class: "btn btn-warning" %>
     </div>
   </div>
 <% end %>
