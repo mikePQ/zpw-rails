@@ -1,16 +1,14 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Tickets</h1>
+<h1>Bilety</h1>
 
 <table>
   <thead>
   <tr>
-    <th>Name</th>
-    <th>Seat id seq</th>
-    <th>Address</th>
-    <th>Price</th>
-    <th>Email address</th>
-    <th>Phone</th>
+    <th>Imię i nazwisko</th>
+    <th>Id miejsca</th>
+    <th>Adres</th>
+    <th>Cena</th>
+    <th>Email</th>
+    <th>Telefon</th>
     <th colspan="3"></th>
   </tr>
   </thead>
@@ -24,9 +22,9 @@
       <td><%= ticket.price %></td>
       <td><%= ticket.email_address %></td>
       <td><%= ticket.phone %></td>
-      <td><%= link_to 'Show', ticket %></td>
-      <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
-      <td><%= link_to 'Destroy', ticket, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      <td><%= link_to 'Szczegóły', ticket %></td>
+      <td><%= link_to 'Edytuj', edit_ticket_path(ticket) %></td>
+      <td><%= link_to 'Usuń', ticket, method: :delete, data: {confirm: 'Czy jesteś pewien?'} %></td>
     </tr>
   <% end %>
   </tbody>
@@ -34,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Ticket', new_ticket_path %>
+<%= link_to 'Nowy bilet', new_ticket_path %>

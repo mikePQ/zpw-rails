@@ -25,7 +25,15 @@
   <%= @event.event_date %>
 </p>
 
-<%= render "tickets/tickets_list", tickets: @event.tickets %>
-<%= render "tickets/new_ticket", ticket: Ticket.new(:event_id => @event.id) %>
+<div class="top-mg-50">
+  <%= render "tickets/tickets_list", tickets: @event.tickets %>
+</div>
 
-<%= link_to 'Back', events_path %>
+<div class="top-mg-50 new-ticket">
+  <%= render "tickets/new_ticket", ticket: Ticket.new(:event_id => @event.id) %>
+</div>
+
+<button class="btn btn-warning top-mg-50">
+  <%= link_to 'Powrót', events_path %>
+</button>
+
