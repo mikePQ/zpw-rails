@@ -1,7 +1,7 @@
 <%= form_with(model: ticket, local: true) do |form| %>
   <% if ticket.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
+      <h2>Formularz zawiera błędy:</h2>
 
       <ul>
         <% ticket.errors.full_messages.each do |message| %>
@@ -11,37 +11,63 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :ticket_name %>
-  </div>
+  <div class="form-wrapper">
+    <div class="field row">
+      <div class="col-md-2">
+        <%= form.label "Imię i nazwisko" %>
+      </div>
+      <div class="col-md-10">
+        <%= form.text_field :name, id: :ticket_name, class: "w-100" %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :seat_id_seq %>
-    <%= form.text_field :seat_id_seq, id: :ticket_seat_id_seq %>
-  </div>
+    <div class="field row">
+      <div class="col-md-2">
+        <%= form.label "Id miejsca" %>
+      </div>
+      <div class="col-md-10">
+        <%= form.text_field :seat_id_seq, id: :ticket_seat_id_seq, class: "w-100" %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_area :address, id: :ticket_address %>
-  </div>
+    <div class="field row">
+      <div class="col-md-2">
+        <%= form.label "Adres" %>
+      </div>
+      <div class="col-md-10">
+        <%= form.text_area :address, id: :ticket_address, class: "w-100" %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price, id: :ticket_price %>
-  </div>
+    <div class="field row">
+      <div class="col-md-2">
+        <%= form.label "Cena" %>
+      </div>
+      <div class="col-md-10">
+        <%= form.text_field :price, id: :ticket_price, class: "w-100" %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :email_address %>
-    <%= form.text_field :email_address, id: :ticket_email_address %>
-  </div>
+    <div class="field row">
+      <div class="col-md-2">
+        <%= form.label "Email" %>
+      </div>
+      <div class="col-md-10">
+        <%= form.text_field :email_address, id: :ticket_email_address, class: "w-100" %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :phone %>
-    <%= form.text_field :phone, id: :ticket_phone %>
-  </div>
+    <div class="field row">
+      <div class="col-md-2">
+        <%= form.label "Telefon" %>
+      </div>
+      <div class="col-md-10">
+        <%= form.text_field :phone, id: :ticket_phone, class: "w-100" %>
+      </div>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
+    <div class="row actions float-right">
+      <%= form.submit "Utwórz bilet", class: "btn btn-warning" %>
+    </div>
   </div>
 <% end %>

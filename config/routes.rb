@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :events, :only => [:index, :new, :create, :show]
+  resources :users, :only => [:new, :create]
   resources :tickets
 
   get '/signup', to: 'users#new'
