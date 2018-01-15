@@ -1,4 +1,4 @@
-<h1>Wydarzenia</h1>
+<h1>Aktualne wydarzenia</h1>
 <div class="table-responsive top-mg-50">
   <table class="table table-striped">
     <thead class="thead-dark">
@@ -11,11 +11,11 @@
     </thead>
 
     <tbody>
-    <% @events.each do |event| %>
+    <% current_events(@events).each do |event| %>
       <tr>
         <td><%= event.artist %></td>
         <td><%= format_date event.event_date %></td>
-        <td><%= event.tickets.length %></td>
+        <td><%= event.available_seats.length %></td>
         <td><%= link_to 'Szczegóły', event %></td>
       </tr>
     <% end %>
@@ -24,7 +24,35 @@
 </div>
 <br>
 
-<% if logged_in? %>
+<% if current_user&.admin %>
+  <div class="top-mg-50">
+    <h1>Archiwalne wydarzenia</h1>
+    <div class="table-responsive top-mg-50">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+          <th class="w-50">Artysta</th>
+          <th class="w-25">Data</th>
+          <th class="w-25">Miejsca</th>
+          <th colspan="1"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% archived_events(@events).each do |event| %>
+          <tr>
+            <td><%= event.artist %></td>
+            <td><%= format_date event.event_date %></td>
+            <td><%= event.available_seats.length %></td>
+            <td><%= link_to 'Szczegóły', event %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <br>
+  </div>
+
   <button class="btn btn-warning">
     <%= link_to 'Nowe ogłoszenie', new_event_path %>
   </button>
