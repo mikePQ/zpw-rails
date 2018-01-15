@@ -35,4 +35,21 @@ class Event < ApplicationRecord
   def seats_columns
     15
   end
+
+  def self.search(search)
+    if search
+      where('artist LIKE ?', "%#{search}%")
+    else
+      all
+    end
+  end
+
+  def self.filter(start_date, end_date)
+    if start_date.to_s.empty?
+      return end_date.to_s.empty? ? all : where("event_date <= :end_date", {end_date: end_date})
+    else
+      return end_date.to_s.empty? ? where("event_date >= :start_date", {start_date: start_date}) :
+                 where("event_date >= :start_date AND event_date <= :end_date", {start_date: start_date, end_date: end_date})
+    end
+  end
 end

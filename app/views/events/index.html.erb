@@ -1,4 +1,38 @@
 <h1>Aktualne wydarzenia</h1>
+
+<div class="top-mg-50">
+  <%= form_tag events_path, :method => 'get' do %>
+    <div class="row top-mg-15">
+      <div class="col-md-2">
+        <label>Data początkowa</label>
+      </div>
+      <div class="col-md-10">
+        <%= date_field_tag :start_date, params[:start_date], class: "w-100 form-control" %>
+      </div>
+    </div>
+    <div class="row top-mg-15">
+      <div class="col-md-2">
+        <label>Data końcowa</label>
+      </div>
+      <div class="col-md-10">
+        <%= date_field_tag :end_date, params[:end_date], class: "w-100 form-control" %>
+      </div>
+    </div>
+    <div class="row top-mg-15">
+      <div class="col-md-2 offset-8">
+        <a href="/events">
+          <button class="btn btn-warning">
+            Resetuj filtrowanie
+          </button>
+        </a>
+      </div>
+      <div class="col-md-2">
+        <%= submit_tag "Filtruj", :name => nil, class: "btn btn-warning w-100" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
 <div class="table-responsive top-mg-50">
   <table class="table table-striped">
     <thead class="thead-dark">

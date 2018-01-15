@@ -1,6 +1,14 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.all
+    start_date = params[:start_date]
+    end_date = params[:end_date]
+
+    search = params[:search]
+    if search.to_s.empty?
+      @events = Event.filter(start_date, end_date).order("event_date desc").paginate(:per_page => 10, :page => params[:page])
+    else
+      @events = Event.search(search).order("event_date desc").paginate(:per_page => 10, :page => params[:page])
+    end
   end
 
   def new
