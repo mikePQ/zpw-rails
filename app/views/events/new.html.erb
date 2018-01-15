@@ -58,6 +58,24 @@
       </div>
     </div>
 
+    <div class="row field">
+      <div class="col-md-2">
+        <%= form.label "Ilość miejsc (rzędy)" %>
+      </div>
+      <div class="col-md-10">
+        <%= form.text_field :seats_rows, id: :event_seats_rows, class: "w-100" %>
+      </div>
+    </div>
+
+    <div class="row field">
+      <div class="col-md-2">
+        <%= form.label "Ilość miejsc w rzędzie" %>
+      </div>
+      <div class="col-md-10">
+        <%= form.text_field :seats_columns, id: :event_seats_columns, class: "w-100" %>
+      </div>
+    </div>
+
     <div class="row actions float-right">
       <%= form.submit "Utwórz", class: "btn btn-warning" %>
     </div>

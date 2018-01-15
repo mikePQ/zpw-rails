@@ -28,14 +28,6 @@ class Event < ApplicationRecord
     (64 + row).chr + col.to_s
   end
 
-  def seats_rows
-    8
-  end
-
-  def seats_columns
-    15
-  end
-
   def self.search(search)
     if search
       where('artist LIKE ?', "%#{search}%")
