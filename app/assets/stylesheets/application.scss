@@ -116,3 +116,13 @@ a, a:visited, a:hover {
 .actions {
   margin-top: 50px;
 }
+
+.selected {
+  background: #f39c12;
+  border: 1px solid #f39c12;
+}
+
+.selected:hover {
+  background: #f39c12;
+  border: 1px solid #f39c12;
+}

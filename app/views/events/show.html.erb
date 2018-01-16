@@ -30,9 +30,9 @@
     <div class="row">
       <% for j in 1..@event.seats_columns do %>
         <% seat = @event.get_seat(i, j) %>
-        <button
-        class="btn
-          <%= @event.is_available(seat) ? 'btn-danger' : 'btn-success' %>"
+        <a
+        class="text-white btn
+          <%= @event.is_available(seat) ? 'btn-success seat-button' : 'btn-danger seat-button' %>"
         style="padding: 15px 0; width : <%= width  %>%;
             <% if j < @event.seats_columns %>
             border-right: 1px solid #fff;
@@ -44,9 +44,9 @@
           <% if @event.is_available(seat) %>
             <%= seat %>
           <% else %>
-            <%= link_to seat, new_ticket_path(:seat_id_seq => seat, :event_id => @event.id), class: "btn text-white w-100" %>
+            <%= seat %>
           <% end %>
-        </button>
+        </a>
       <% end %>
     </div>
   <% end %>
@@ -62,3 +62,4 @@
   <%= link_to 'Powrót', events_path %>
 </button>
 
+<%= javascript_include_tag 'event', 'data-turbolinks-track': 'reload' %>

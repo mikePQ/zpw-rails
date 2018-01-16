@@ -1,5 +1,6 @@
 class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+  before_action :authorize
 
   # GET /tickets
   def index
@@ -57,6 +58,12 @@ class TicketsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_ticket
     @ticket = Ticket.find(params[:id])
+  end
+
+  def authorize
+    if current_user.nil?
+      redirect_to "/"
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

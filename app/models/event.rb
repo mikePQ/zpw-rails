@@ -17,7 +17,7 @@ class Event < ApplicationRecord
   end
 
   def is_available(seat)
-    tickets.map {|ticket| ticket.seat_id_seq}.include? seat
+    !tickets.map {|ticket| ticket.seat_id_seq}.include? seat
   end
 
   def available_seats
