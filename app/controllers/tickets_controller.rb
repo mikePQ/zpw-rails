@@ -5,7 +5,15 @@ class TicketsController < ApplicationController
 
   # GET /tickets
   def index
-    @tickets = Ticket.all
+    start_date = params[:start_date]
+    end_date = params[:end_date]
+
+    artist = params[:artist]
+    if artist.to_s.empty?
+      @tickets = Ticket.filter(start_date, end_date).order("event_date desc").paginate(:per_page => 10, :page => params[:page])
+    else
+      @tickets = Ticket.search(artist).filter(start_date, end_date).order("event_date desc").paginate(:per_page => 10, :page => params[:page])
+    end
   end
 
   # GET /tickets/1
