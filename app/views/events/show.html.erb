@@ -33,7 +33,7 @@
         <a
         class="text-white btn
           <%= @event.is_available(seat) ? 'btn-success seat-button' : 'btn-danger seat-button' %>"
-        style="padding: 15px 0; width : <%= width  %>%;
+        style="padding: 15px 0; width : <%= width %>%;
             <% if j < @event.seats_columns %>
             border-right: 1px solid #fff;
             <% end %>
@@ -46,6 +46,14 @@
       <% end %>
     </div>
   <% end %>
+</div>
+
+<div class="top-mg-50">
+  <div class="row">
+    <div class="offset-8 col-md-4">
+      <button class="btn btn-warning w-100 buy-button">Kup bilety</button>
+    </div>
+  </div>
 </div>
 
 <% if current_user&.admin %>

@@ -1,0 +1,71 @@
+<h1>Zakup biletu</h1>
+
+<div class="top-mg-50">
+  <% tickets = create_tickets(params) %>
+  <p><strong>Ilość biletów:</strong> <%= tickets.length %></p>
+  <p><strong>Łączna cena:</strong> <%= total_price(tickets) %></p>
+</div>
+
+<div class="form-wrapper">
+  <div class="field row">
+    <div class="col-md-2">
+      <label for="name">
+        Imię i nazwisko
+      </label>
+    </div>
+    <div class="col-md-10">
+      <input id="name" type="text" class="w-100">
+    </div>
+  </div>
+
+  <div class="field row">
+    <div class="col-md-2">
+      <label for="address">
+        Adres
+      </label>
+    </div>
+    <div class="col-md-10">
+      <textarea id="address" class="w-100">
+      </textarea>
+    </div>
+  </div>
+
+  <div class="field row">
+    <div class="col-md-2">
+      <label for="price">
+        Cena
+      </label>
+    </div>
+    <div class="col-md-10">
+      <input type="number" id="price" class="w-100">
+    </div>
+  </div>
+
+  <div class="field row">
+    <div class="col-md-2">
+      <label for="email">
+        Email
+      </label>
+    </div>
+    <div class="col-md-10">
+      <input type="email" id="email" class="w-100">
+    </div>
+  </div>
+
+  <div class="field row">
+    <div class="col-md-2">
+      <label for="phone">
+        Telefon
+      </label>
+    </div>
+    <div class="col-md-10">
+      <input type="text" id="phone" class="w-100">
+    </div>
+  </div>
+
+  <div class="row actions float-right">
+    <button class="btn btn-warning submit-button">
+      Zatwierdź
+    </button>
+  </div>
+</div>

@@ -3,7 +3,7 @@ class Seat {
     isAvailable: boolean;
 
     constructor(private htmlElement: Element,
-                private id: string) {
+                public id: string) {
 
         this.addClickHandler();
         this.isAvailable = Seat.isAvailable(htmlElement);
@@ -15,7 +15,7 @@ class Seat {
         }
 
         this.htmlElement.addEventListener("click", () => {
-            if (!this.isSelected && !manager.canSelect(this)) {
+            if (!this.isSelected && !seatsManager.canSelect(this)) {
                 if (this.isAvailable) {
                     alert("Nie można wybrać więcej niż 5 miejsc");
                 }
@@ -46,7 +46,6 @@ class Seat {
     static initializeSeats(): Array<Seat> {
         let result: Array<Seat> = [];
         let seatButtons = document.getElementsByClassName('seat-button');
-        console.log(seatButtons.length);
         for (let i = 0; i < seatButtons.length; i++) {
             let seatButton = seatButtons.item(i);
             if (seatButton) {
@@ -72,7 +71,7 @@ class Seat {
             return null;
         }
 
-        return child.textContent
+        return child.textContent.replace(/\s+/g, '')
     }
 }
 
@@ -88,5 +87,61 @@ class SeatsManager {
     }
 }
 
-let manager = new SeatsManager();
+class TicketManager {
+    constructor(private seatsManager: SeatsManager) {
+        TicketManager.initializeBuyButton(this);
+    }
+
+    buyTickets() {
+        let selectedSeats = this.seatsManager.getSelected();
+        if (selectedSeats.length < 1) {
+            return;
+        }
+
+        let requestBuilder = new BuyRequestBuilder();
+        window.location.href = requestBuilder.buildRequest(selectedSeats);
+    }
+
+    static initializeBuyButton(ticketsManager: TicketManager) {
+        let buyButton = document.getElementsByClassName('buy-button')[0];
+        if (!buyButton) {
+            return;
+        }
+
+        buyButton.addEventListener('click', () => {
+            ticketsManager.buyTickets();
+        });
+    }
+
+    static getEventId(): string {
+        let pathname = window.location.pathname;
+        let elements = pathname.split("/");
+
+        return elements[elements.length - 1];
+    }
+}
+
+class BuyRequestBuilder {
+
+    buildRequest(selectedSeats: Array<Seat>): string {
+        let eventId = TicketManager.getEventId();
+        return `/buy?event_id=${eventId}${this.buildSeatsParameters(selectedSeats)}`;
+    }
+
+    private buildSeatsParameters(seats: Array<Seat>): string {
+        let parametersString = "";
+        seats.forEach(seat => {
+            console.log(seat.id);
+            parametersString += `&seat_ids[]=${seat.id}`;
+        });
+
+        return parametersString;
+    }
+}
+
+let seatsManager = new SeatsManager();
+let ticketManager = new TicketManager(seatsManager);
+
+console.log(TicketManager.getEventId());
+
 

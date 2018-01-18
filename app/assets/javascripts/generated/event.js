@@ -12,7 +12,7 @@ var Seat = /** @class */ (function () {
             return;
         }
         this.htmlElement.addEventListener("click", function () {
-            if (!_this.isSelected && !manager.canSelect(_this)) {
+            if (!_this.isSelected && !seatsManager.canSelect(_this)) {
                 if (_this.isAvailable) {
                     alert("Nie można wybrać więcej niż 5 miejsc");
                 }
@@ -39,7 +39,6 @@ var Seat = /** @class */ (function () {
     Seat.initializeSeats = function () {
         var result = [];
         var seatButtons = document.getElementsByClassName('seat-button');
-        console.log(seatButtons.length);
         for (var i = 0; i < seatButtons.length; i++) {
             var seatButton = seatButtons.item(i);
             if (seatButton) {
@@ -60,7 +59,7 @@ var Seat = /** @class */ (function () {
         if (!child) {
             return null;
         }
-        return child.textContent;
+        return child.textContent.replace(/\s+/g, '');
     };
     return Seat;
 }());
@@ -76,5 +75,53 @@ var SeatsManager = /** @class */ (function () {
     };
     return SeatsManager;
 }());
-var manager = new SeatsManager();
+var TicketManager = /** @class */ (function () {
+    function TicketManager(seatsManager) {
+        this.seatsManager = seatsManager;
+        TicketManager.initializeBuyButton(this);
+    }
+    TicketManager.prototype.buyTickets = function () {
+        var selectedSeats = this.seatsManager.getSelected();
+        if (selectedSeats.length < 1) {
+            return;
+        }
+        var requestBuilder = new BuyRequestBuilder();
+        window.location.href = requestBuilder.buildRequest(selectedSeats);
+    };
+    TicketManager.initializeBuyButton = function (ticketsManager) {
+        var buyButton = document.getElementsByClassName('buy-button')[0];
+        if (!buyButton) {
+            return;
+        }
+        buyButton.addEventListener('click', function () {
+            ticketsManager.buyTickets();
+        });
+    };
+    TicketManager.getEventId = function () {
+        var pathname = window.location.pathname;
+        var elements = pathname.split("/");
+        return elements[elements.length - 1];
+    };
+    return TicketManager;
+}());
+var BuyRequestBuilder = /** @class */ (function () {
+    function BuyRequestBuilder() {
+    }
+    BuyRequestBuilder.prototype.buildRequest = function (selectedSeats) {
+        var eventId = TicketManager.getEventId();
+        return "/buy?event_id=" + eventId + this.buildSeatsParameters(selectedSeats);
+    };
+    BuyRequestBuilder.prototype.buildSeatsParameters = function (seats) {
+        var parametersString = "";
+        seats.forEach(function (seat) {
+            console.log(seat.id);
+            parametersString += "&seat_ids[]=" + seat.id;
+        });
+        return parametersString;
+    };
+    return BuyRequestBuilder;
+}());
+var seatsManager = new SeatsManager();
+var ticketManager = new TicketManager(seatsManager);
+console.log(TicketManager.getEventId());
 //# sourceMappingURL=event.js.map
