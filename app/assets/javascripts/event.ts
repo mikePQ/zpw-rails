@@ -17,7 +17,7 @@ class Seat {
         this.htmlElement.addEventListener("click", () => {
             if (!this.isSelected && !seatsManager.canSelect(this)) {
                 if (this.isAvailable) {
-                    alert("Nie można wybrać więcej niż 5 miejsc");
+                    alert("Nie można kupić więcej niż 5 biletów na jedno wydarzenie");
                 }
                 return;
             }
@@ -77,13 +77,23 @@ class Seat {
 
 class SeatsManager {
     seats: Array<Seat> = Seat.initializeSeats();
+    maxSelected: number = 5;
+
+    constructor() {
+        this.maxSelected = SeatsManager.getMaxNumberOfTickets();
+    }
 
     getSelected(): Array<Seat> {
         return this.seats.filter(seat => seat.isSelected);
     }
 
     canSelect(seat: Seat): boolean {
-        return this.getSelected().length < 5 && seat.isAvailable;
+        return this.getSelected().length < this.maxSelected && seat.isAvailable;
+    }
+
+    static getMaxNumberOfTickets(): number {
+        let element = document.getElementsByClassName("max-tickets")[0];
+        return Number(element.textContent.replace(/\s+/g, ''));
     }
 }
 

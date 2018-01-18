@@ -66,4 +66,8 @@
   <%= link_to 'Powrót', events_path %>
 </button>
 
+<div class="max-tickets" style="display: none">
+  <%= 5 - user_tickets(@event.tickets).length %>
+</div>
+
 <%= javascript_include_tag 'event', 'data-turbolinks-track': 'reload' %>

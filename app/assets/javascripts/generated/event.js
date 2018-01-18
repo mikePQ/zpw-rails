@@ -14,7 +14,7 @@ var Seat = /** @class */ (function () {
         this.htmlElement.addEventListener("click", function () {
             if (!_this.isSelected && !seatsManager.canSelect(_this)) {
                 if (_this.isAvailable) {
-                    alert("Nie można wybrać więcej niż 5 miejsc");
+                    alert("Nie można kupić więcej niż 5 biletów na jedno wydarzenie");
                 }
                 return;
             }
@@ -66,12 +66,18 @@ var Seat = /** @class */ (function () {
 var SeatsManager = /** @class */ (function () {
     function SeatsManager() {
         this.seats = Seat.initializeSeats();
+        this.maxSelected = 5;
+        this.maxSelected = SeatsManager.getMaxNumberOfTickets();
     }
     SeatsManager.prototype.getSelected = function () {
         return this.seats.filter(function (seat) { return seat.isSelected; });
     };
     SeatsManager.prototype.canSelect = function (seat) {
-        return this.getSelected().length < 5 && seat.isAvailable;
+        return this.getSelected().length < this.maxSelected && seat.isAvailable;
+    };
+    SeatsManager.getMaxNumberOfTickets = function () {
+        var element = document.getElementsByClassName("max-tickets")[0];
+        return Number(element.textContent.replace(/\s+/g, ''));
     };
     return SeatsManager;
 }());
