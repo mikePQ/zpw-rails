@@ -1,4 +1,5 @@
 class TicketsController < ApplicationController
+  include TicketsHelper
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
   before_action :authorize
 
@@ -55,6 +56,23 @@ class TicketsController < ApplicationController
   end
 
   def buy
+  end
+
+  def create_all
+    event_id = params[:event_id]
+    name = params[:name]
+    email = params[:email]
+    phone = params[:phone]
+    address = params[:address]
+
+    seat_ids = params[:seat_ids]
+    user_id = current_user.id
+    price = ticket_price(event_id)
+
+    seat_ids.each do |seat|
+      @ticket = Ticket.new({:seat_id_seq => seat, :event_id => event_id, :name => name, :email_address => email, :phone => phone, :user_id => user_id, :price => price, :address => address})
+      @ticket.save
+    end
   end
 
   private

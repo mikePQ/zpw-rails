@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "outFile": "app/assets/javascripts/generated/event.js",
+    "outDir": "app/assets/javascripts/generated",
     "noImplicitAny": true,
     "noEmitOnError": true,
     "sourceMap": true,
     "target": "es5"
   },
   "files": [
-    "app/assets/javascripts/event.ts"
+    "app/assets/javascripts/event.ts",
+    "app/assets/javascripts/ticket.ts"
   ]
 }

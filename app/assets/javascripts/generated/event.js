@@ -80,7 +80,7 @@ var TicketManager = /** @class */ (function () {
         this.seatsManager = seatsManager;
         TicketManager.initializeBuyButton(this);
     }
-    TicketManager.prototype.buyTickets = function () {
+    TicketManager.prototype.goToBuyForm = function () {
         var selectedSeats = this.seatsManager.getSelected();
         if (selectedSeats.length < 1) {
             return;
@@ -94,7 +94,7 @@ var TicketManager = /** @class */ (function () {
             return;
         }
         buyButton.addEventListener('click', function () {
-            ticketsManager.buyTickets();
+            ticketsManager.goToBuyForm();
         });
     };
     TicketManager.getEventId = function () {

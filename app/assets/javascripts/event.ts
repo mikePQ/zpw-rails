@@ -92,7 +92,7 @@ class TicketManager {
         TicketManager.initializeBuyButton(this);
     }
 
-    buyTickets() {
+    goToBuyForm() {
         let selectedSeats = this.seatsManager.getSelected();
         if (selectedSeats.length < 1) {
             return;
@@ -109,7 +109,7 @@ class TicketManager {
         }
 
         buyButton.addEventListener('click', () => {
-            ticketsManager.buyTickets();
+            ticketsManager.goToBuyForm();
         });
     }
 

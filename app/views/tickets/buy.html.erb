@@ -7,65 +7,57 @@
 </div>
 
 <div class="form-wrapper">
-  <div class="field row">
-    <div class="col-md-2">
-      <label for="name">
-        Imię i nazwisko
-      </label>
+  <form id="buy-form">
+    <div class="field row">
+      <div class="col-md-2">
+        <label for="name">
+          Imię i nazwisko
+        </label>
+      </div>
+      <div class="col-md-10">
+        <input id="name" name="name" type="text" class="w-100">
+      </div>
     </div>
-    <div class="col-md-10">
-      <input id="name" type="text" class="w-100">
-    </div>
-  </div>
 
-  <div class="field row">
-    <div class="col-md-2">
-      <label for="address">
-        Adres
-      </label>
-    </div>
-    <div class="col-md-10">
-      <textarea id="address" class="w-100">
+    <div class="field row">
+      <div class="col-md-2">
+        <label for="address">
+          Adres
+        </label>
+      </div>
+      <div class="col-md-10">
+      <textarea id="address" name="address" class="w-100">
       </textarea>
+      </div>
     </div>
-  </div>
 
-  <div class="field row">
-    <div class="col-md-2">
-      <label for="price">
-        Cena
-      </label>
+    <div class="field row">
+      <div class="col-md-2">
+        <label for="email">
+          Email
+        </label>
+      </div>
+      <div class="col-md-10">
+        <input type="email" id="email" name="email" class="w-100">
+      </div>
     </div>
-    <div class="col-md-10">
-      <input type="number" id="price" class="w-100">
-    </div>
-  </div>
 
-  <div class="field row">
-    <div class="col-md-2">
-      <label for="email">
-        Email
-      </label>
+    <div class="field row">
+      <div class="col-md-2">
+        <label for="phone">
+          Telefon
+        </label>
+      </div>
+      <div class="col-md-10">
+        <input type="text" id="phone" name="phone" class="w-100">
+      </div>
     </div>
-    <div class="col-md-10">
-      <input type="email" id="email" class="w-100">
-    </div>
-  </div>
-
-  <div class="field row">
-    <div class="col-md-2">
-      <label for="phone">
-        Telefon
-      </label>
-    </div>
-    <div class="col-md-10">
-      <input type="text" id="phone" class="w-100">
-    </div>
-  </div>
-
+  </form>
   <div class="row actions float-right">
-    <button class="btn btn-warning submit-button">
+    <button class="btn btn-warning confirm-buy-button">
       Zatwierdź
     </button>
   </div>
 </div>
+
+<%= javascript_include_tag 'ticket', 'data-turbolinks-track': 'reload' %>
