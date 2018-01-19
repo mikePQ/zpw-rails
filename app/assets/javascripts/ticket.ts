@@ -23,8 +23,9 @@ class TicketBuyForm {
     submitForm(eventId: string, seatsIds: string[]) {
         let form = document.forms.namedItem("buy-form");
 
-        if (!validator.validate(form)) {
-            alert(validator.messages[0]);
+        let valid = validator.validate(form);
+        this.showValidationErrors(validator.messages);
+        if (!valid) {
             return;
         }
 
@@ -61,6 +62,31 @@ class TicketBuyForm {
             alert(error.message);
         }
     }
+
+    private showValidationErrors(errors: Array<string>) {
+        let errorsContainer = document.getElementsByClassName('validation-errors')[0];
+        if (!errorsContainer) {
+            return;
+        }
+
+        errorsContainer.classList.remove('alert');
+        errorsContainer.classList.remove('alert-danger');
+        errorsContainer.innerHTML = "";
+
+        if (errors.length === 0) {
+            return;
+        }
+
+        errorsContainer.classList.add('alert');
+        errorsContainer.classList.add('alert-danger');
+
+        let innerHtml = "<strong>Formularz zawiera błędy:</strong><br><ul>";
+        errors.forEach(error => {
+            innerHtml += `<li>${error}</li>`;
+        });
+        innerHtml += "</ul>";
+        errorsContainer.innerHTML = innerHtml;
+    }
 }
 
 function getInputValue(form: HTMLFormElement, elementName: string): string {
@@ -86,7 +112,7 @@ function getTotalPrice(): number {
 }
 
 class FormValidator {
-    messages: Array<String> = [];
+    messages: Array<string> = [];
 
     validate(form: HTMLFormElement): boolean {
         this.messages = [];

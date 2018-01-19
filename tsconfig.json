@@ -8,6 +8,7 @@
   },
   "files": [
     "app/assets/javascripts/event.ts",
-    "app/assets/javascripts/ticket.ts"
+    "app/assets/javascripts/ticket.ts",
+    "app/assets/javascripts/modal.ts"
   ]
 }

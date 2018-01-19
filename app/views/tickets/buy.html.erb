@@ -16,7 +16,10 @@
   <p><strong>Łączna cena:</strong> <span class="total-price"><%= total_price(seats) %></span></p>
 </div>
 
-<div class="form-wrapper">
+<div class="validation-errors top-mg-50">
+</div>
+
+<div class="form-wrapper top-mg-50">
   <form id="buy-form">
     <div class="field row">
       <div class="col-md-2">
@@ -63,7 +66,7 @@
       </div>
     </div>
     <% if event.adult_only %>
-      <div class="row field top-mg-35">
+      <div class="row field top-mg-50">
         <div class="col-md-12">
           <label for="adult">Potwierdzam, że jestem osobą pełnoletnią</label>
           <input type="checkbox" id="adult">

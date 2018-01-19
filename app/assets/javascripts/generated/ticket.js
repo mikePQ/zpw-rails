@@ -19,8 +19,9 @@ var TicketBuyForm = /** @class */ (function () {
     };
     TicketBuyForm.prototype.submitForm = function (eventId, seatsIds) {
         var form = document.forms.namedItem("buy-form");
-        if (!validator.validate(form)) {
-            alert(validator.messages[0]);
+        var valid = validator.validate(form);
+        this.showValidationErrors(validator.messages);
+        if (!valid) {
             return;
         }
         var name = getInputValue(form, "name");
@@ -49,6 +50,26 @@ var TicketBuyForm = /** @class */ (function () {
         request.onerror = function (error) {
             alert(error.message);
         };
+    };
+    TicketBuyForm.prototype.showValidationErrors = function (errors) {
+        var errorsContainer = document.getElementsByClassName('validation-errors')[0];
+        if (!errorsContainer) {
+            return;
+        }
+        errorsContainer.classList.remove('alert');
+        errorsContainer.classList.remove('alert-danger');
+        errorsContainer.innerHTML = "";
+        if (errors.length === 0) {
+            return;
+        }
+        errorsContainer.classList.add('alert');
+        errorsContainer.classList.add('alert-danger');
+        var innerHtml = "<strong>Formularz zawiera błędy:</strong><br><ul>";
+        errors.forEach(function (error) {
+            innerHtml += "<li>" + error + "</li>";
+        });
+        innerHtml += "</ul>";
+        errorsContainer.innerHTML = innerHtml;
     };
     return TicketBuyForm;
 }());
