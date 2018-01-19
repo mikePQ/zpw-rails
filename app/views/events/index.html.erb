@@ -37,10 +37,10 @@
   <table class="table table-striped">
     <thead class="thead-dark">
     <tr>
-      <th class="w-50">Artysta</th>
-      <th class="w-25">Data</th>
-      <th class="w-25">Miejsca</th>
-      <th colspan="1"></th>
+      <th>Artysta</th>
+      <th>Data</th>
+      <th>Miejsca</th>
+      <th colspan="3"></th>
     </tr>
     </thead>
 
@@ -51,6 +51,10 @@
         <td><%= format_date event.event_date %></td>
         <td><%= event.available_seats.length %></td>
         <td><%= link_to 'Szczegóły', event %></td>
+        <% if current_user&.admin %>
+          <td><%= link_to 'Edytuj', edit_event_path(event) %></td>
+          <td><%= link_to 'Usuń', event, method: :delete, data: {confirm: 'Czy jesteś pewien?'} %></td>
+        <% end %>
       </tr>
     <% end %>
     </tbody>
@@ -65,10 +69,10 @@
       <table class="table table-striped">
         <thead class="thead-dark">
         <tr>
-          <th class="w-50">Artysta</th>
-          <th class="w-25">Data</th>
-          <th class="w-25">Miejsca</th>
-          <th colspan="1"></th>
+          <th>Artysta</th>
+          <th>Data</th>
+          <th>Miejsca</th>
+          <th colspan="3"></th>
         </tr>
         </thead>
 
@@ -79,6 +83,10 @@
             <td><%= format_date event.event_date %></td>
             <td><%= event.available_seats.length %></td>
             <td><%= link_to 'Szczegóły', event %></td>
+            <% if current_user&.admin %>
+              <td><%= link_to 'Edytuj', edit_event_path(event) %></td>
+              <td><%= link_to 'Usuń', event, method: :delete, data: {confirm: 'Czy jesteś pewien?'} %></td>
+            <% end %>
           </tr>
         <% end %>
         </tbody>

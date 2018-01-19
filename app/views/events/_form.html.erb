@@ -1,0 +1,89 @@
+<%= form_with(model: event, local: true) do |form| %>
+  <% if event.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger top-mg-50">
+      <h2>Formularz zawiera błędy:</h2>
+      <ul>
+        <% event.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-wrapper">
+
+    <div class="row field">
+      <div class="col-md-2">
+        <%= form.label "Artysta" %>
+      </div>
+      <div class="col-md-10">
+        <%= form.text_field :artist, id: :event_artist, class: "w-100" %>
+      </div>
+    </div>
+
+    <div class="row field">
+      <div class="col-md-2">
+        <%= form.label "Krótki opis" %>
+      </div>
+      <div class="col-md-10">
+        <%= form.text_field :description, id: :event_description, class: "w-100" %>
+      </div>
+    </div>
+
+    <div class="row field">
+      <div class="col-md-2">
+        <%= form.label "Cena minimalna" %>
+      </div>
+      <div class="col-md-10">
+        <%= form.text_field :price_low, id: :event_price_low, class: "w-100" %>
+      </div>
+    </div>
+
+    <div class="row field">
+      <div class="col-md-2">
+        <%= form.label "Cena maksymalna" %>
+      </div>
+      <div class="col-md-10">
+        <%= form.text_field :price_high, id: :event_price_high, class: "w-100" %>
+      </div>
+    </div>
+
+    <div class="row field">
+      <div class="col-md-2">
+        <%= form.label "Data" %>
+      </div>
+      <div class="col-md-10">
+        <%= form.date_field :event_date, id: :event_event_date, class: "w-100" %>
+      </div>
+    </div>
+
+    <div class="row field">
+      <div class="col-md-2">
+        <%= form.label "Ilość miejsc (rzędy)" %>
+      </div>
+      <div class="col-md-10">
+        <%= form.text_field :seats_rows, id: :event_seats_rows, class: "w-100" %>
+      </div>
+    </div>
+
+    <div class="row field">
+      <div class="col-md-2">
+        <%= form.label "Ilość miejsc w rzędzie" %>
+      </div>
+      <div class="col-md-10">
+        <%= form.text_field :seats_columns, id: :event_seats_columns, class: "w-100" %>
+      </div>
+    </div>
+
+    <div class="row field">
+      <div class="col-md-12">
+        <%= form.label "Wydarzenie przeznaczone tylko dla osób dorosłych" %>
+        <%= form.check_box :adult_only, id: :event_adult_only %>
+      </div>
+    </div>
+
+    <div class="row actions float-right">
+      <%= form.submit name, class: "btn btn-warning" %>
+    </div>
+  </div>
+<% end %>
