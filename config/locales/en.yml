@@ -30,4 +30,15 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    models:
+      event: ""
+    attributes:
+      event:
+        artist: ""
+        description: ""
+        event_date: ""
+        price_low: ""
+        price_high: ""
+        seats_rows: ""
+        seats_columns: ""

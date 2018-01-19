@@ -1,8 +1,8 @@
 <h1>Nowe ogłoszenie</h1>
 <%= form_with(model: @event, local: true) do |form| %>
   <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2>Formularz rejestracyjny zawiera błędy:</h2>
+    <div id="error_explanation" class="alert alert-danger top-mg-50">
+      <h2>Formularz zawiera błędy:</h2>
       <ul>
         <% @event.errors.full_messages.each do |message| %>
           <li><%= message %></li>

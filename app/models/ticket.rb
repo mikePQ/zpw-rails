@@ -3,11 +3,16 @@ class Ticket < ApplicationRecord
   belongs_to :user
 
   validates :name, :presence => true,
-            :length => {:minimum => 6}
-  validates :email_address, :presence => true
+            :length => {:minimum => 5}
+  validates :email_address, :presence => true,
+            :length => {:minimum => 5}
   validates :price, :presence => true
-
-  #TODO validation for other fields
+  validates :seat_id_seq, :presence => true
+  validates :event_id, :presence => true
+  validates :phone, :presence => true,
+            :length => {:minimum => 9, :maximum => 9}
+  validates :address, :presence => true,
+            :length => {:minimum => 10}
 
   def self.search(artist)
     if artist
