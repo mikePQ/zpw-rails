@@ -21,7 +21,7 @@ var TicketBuyForm = /** @class */ (function () {
         var form = document.forms.namedItem("buy-form");
         console.log(form);
         if (!validator.validate(form)) {
-            alert("formularz zawiera błędy");
+            alert(validator.messages[0]);
             return;
         }
         var name = getInputValue(form, "name");
@@ -59,10 +59,24 @@ function getInputValue(form, elementName) {
 function getTextAreaValue(form, elementName) {
     return form.elements.namedItem(elementName).value;
 }
+function getUserBalance() {
+    var element = document.getElementsByClassName("user-balance")[0];
+    return Number(element.textContent.replace(/\s+/g, ''));
+}
+function getTotalPrice() {
+    var element = document.getElementsByClassName("total-price")[0];
+    return Number(element.textContent.replace(/\s+/g, ''));
+}
 var FormValidator = /** @class */ (function () {
     function FormValidator() {
+        this.messages = [];
     }
     FormValidator.prototype.validate = function (form) {
+        this.messages = [];
+        if (getUserBalance() < getTotalPrice()) {
+            this.messages.push("Zbyt mała liczba środków na koncie");
+            return false;
+        }
         return true; //TODO implement
     };
     return FormValidator;

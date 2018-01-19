@@ -25,7 +25,7 @@ class TicketBuyForm {
         console.log(form);
 
         if (!validator.validate(form)) {
-            alert("formularz zawiera błędy");
+            alert(validator.messages[0]);
             return;
         }
 
@@ -72,8 +72,26 @@ function getTextAreaValue(form: HTMLFormElement, elementName: string): string {
     return (<HTMLTextAreaElement>form.elements.namedItem(elementName)).value;
 }
 
+function getUserBalance(): number {
+    let element = document.getElementsByClassName("user-balance")[0];
+    return Number(element.textContent.replace(/\s+/g, ''));
+}
+
+function getTotalPrice(): number {
+    let element = document.getElementsByClassName("total-price")[0];
+    return Number(element.textContent.replace(/\s+/g, ''));
+}
+
 class FormValidator {
+    messages: Array<String> = [];
+
     validate(form: HTMLFormElement): boolean {
+        this.messages = [];
+        if (getUserBalance() < getTotalPrice()) {
+            this.messages.push("Zbyt mała liczba środków na koncie");
+            return false;
+        }
+
         return true; //TODO implement
     }
 }

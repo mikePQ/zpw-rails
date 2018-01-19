@@ -13,7 +13,7 @@
       <%= seat + ' ' %>
     <% end %>
   </p>
-  <p><strong>Łączna cena:</strong> <%= total_price(seats) %></p>
+  <p><strong>Łączna cena:</strong> <span class="total-price"><%= total_price(seats) %></span></p>
 </div>
 
 <div class="form-wrapper">
@@ -68,6 +68,10 @@
       Zatwierdź
     </button>
   </div>
+</div>
+
+<div class="user-balance" style="display: none">
+  <%= current_user.balance %>
 </div>
 
 <%= javascript_include_tag 'ticket', 'data-turbolinks-track': 'reload' %>

@@ -76,6 +76,13 @@
       </div>
     </div>
 
+    <div class="row field">
+      <div class="col-md-12">
+        <%= form.label "Wydarzenie przeznaczone tylko dla osób dorosłych" %>
+        <%= form.check_box :adult_only, id: :event_adult_only %>
+      </div>
+    </div>
+
     <div class="row actions float-right">
       <%= form.submit "Utwórz", class: "btn btn-warning" %>
     </div>

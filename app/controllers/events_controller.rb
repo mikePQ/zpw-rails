@@ -17,7 +17,7 @@ class EventsController < ApplicationController
 
   def create
     event_params = params.require(:event).permit(:artist, :description,
-                                                 :price_low, :price_high, :event_date, :seats_rows, :seats_columns)
+                                                 :price_low, :price_high, :event_date, :seats_rows, :seats_columns, :adult_only)
 
     @event = Event.new(event_params)
     if @event.save
