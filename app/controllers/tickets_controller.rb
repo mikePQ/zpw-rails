@@ -1,5 +1,5 @@
 class TicketsController < ApplicationController
-  include TicketsHelper, EventsHelper
+  include TicketsHelper, EventsHelper, UsersHelper
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
   before_action :authorize
 
@@ -32,10 +32,17 @@ class TicketsController < ApplicationController
   # POST /tickets
   def create
     @ticket = Ticket.new(ticket_params)
-    @ticket.user_id = current_user.id
+    user = current_user
+    @ticket.user_id = user.id
+
+    if user.balance < @ticket.price
+      raise "Brak wystarczających środków na koncie"
+    end
 
     respond_to do |format|
       if @ticket.save
+        new_balance = user.balance - @ticket.price
+        user.update_attribute(:balance, new_balance)
         format.html {redirect_to @ticket, notice: 'Bilet został utworzony'}
       else
         format.html {render :new}
@@ -56,7 +63,13 @@ class TicketsController < ApplicationController
 
   # DELETE /tickets/1
   def destroy
+    amount_to_return = get_amount_to_return(@ticket)
+    user = get_user(@ticket.user_id)
+
     @ticket.destroy
+    new_balance = user.balance + amount_to_return
+    user.update_attribute(:balance, new_balance)
+
     respond_to do |format|
       format.html {redirect_to tickets_url, notice: 'Bilet został usunięty'}
       format.json {head :no_content}
@@ -74,7 +87,8 @@ class TicketsController < ApplicationController
     address = params[:address]
 
     seat_ids = params[:seat_ids]
-    user_id = current_user.id
+    user = current_user
+    user_id = user.id
     price = ticket_price(event_id)
 
     event = get_event(event_id)
@@ -85,9 +99,18 @@ class TicketsController < ApplicationController
       if counter >= max_tickets
         raise "Limit biletów na wydarzenie został wykorzystany";
       end
+
+      if price > user.balance
+        raise "Brak wystarczających środków na koncie"
+      end
+
       @ticket = Ticket.new({:seat_id_seq => seat, :event_id => event_id, :name => name, :email_address => email, :phone => phone, :user_id => user_id, :price => price, :address => address})
-      @ticket.save
-      counter += 1
+
+      if @ticket.save
+        counter += 1
+        new_balance = user.balance - @ticket.price
+        user.update_attribute(:balance, new_balance)
+      end
     end
   end
 

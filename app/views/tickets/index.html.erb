@@ -38,4 +38,5 @@
     </div>
   <% end %>
 </div>
-<%= render 'tickets_list', tickets: user_tickets(@tickets) %>
+<%= render 'tickets_list', tickets: returned(user_tickets(@tickets)) %>
+<%= render 'tickets_list', tickets: not_returned(user_tickets(@tickets)) %>
