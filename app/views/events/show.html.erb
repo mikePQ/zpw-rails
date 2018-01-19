@@ -1,28 +1,33 @@
+<h1>Szczegóły wydarzenia</h1>
 <p id="message"><%= flash[:message] %></p>
-<h6>
-  <strong>Artysta:</strong>
-  <%= @event.artist %>
-</h6>
+<div class="row top-mg-50">
+  <div class="offset-1">
+    <h5>
+      <strong>Artysta:</strong>
+      <%= @event.artist %>
+    </h5>
 
-<h6>
-  <strong>Opis:</strong>
-  <%= @event.description %>
-</h6>
+    <h5>
+      <strong>Opis:</strong>
+      <%= @event.description %>
+    </h5>
 
-<h6>
-  <strong>Cena minimalna:</strong>
-  <%= @event.price_low %>
-</h6>
+    <h5>
+      <strong>Cena minimalna:</strong>
+      <%= @event.price_low %>
+    </h5>
 
-<h6>
-  <strong>Cena maksymalna:</strong>
-  <%= @event.price_high %>
-</h6>
+    <h5>
+      <strong>Cena maksymalna:</strong>
+      <%= @event.price_high %>
+    </h5>
 
-<h6>
-  <strong>Data:</strong>
-  <%= @event.event_date %>
-</h6>
+    <h5>
+      <strong>Data:</strong>
+      <%= @event.event_date %>
+    </h5>
+  </div>
+</div>
 
 <div class="top-mg-50">
   <% width = 100 / @event.seats_columns %>

@@ -1,34 +1,55 @@
-<p id="notice"><%= notice %></p>
+<h1>Dane wydarzenia</h1>
+<div class="row top-mg-50">
+  <div class="offset-1">
+    <% event = get_event(@ticket.event_id) %>
+    <p>
+      <strong>Artysta:</strong>
+      <%= event.artist %>
+    </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @ticket.name %>
-</p>
+    <p>
+      <strong>Data:</strong>
+      <%= format_date(event.event_date) %>
+    </p>
+  </div>
+</div>
 
-<p>
-  <strong>Seat id seq:</strong>
-  <%= @ticket.seat_id_seq %>
-</p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @ticket.address %>
-</p>
+<h1 class="top-mg-50">Dane biletu</h1>
+<div class="row top-mg-50">
+  <div class="offset-1">
+    <p>
+      <strong>Imię i nazwisko:</strong>
+      <%= @ticket.name %>
+    </p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @ticket.price %>
-</p>
+    <p>
+      <strong>Adres:</strong>
+      <%= @ticket.address %>
+    </p>
 
-<p>
-  <strong>Email address:</strong>
-  <%= @ticket.email_address %>
-</p>
+    <p>
+      <strong>Email:</strong>
+      <%= @ticket.email_address %>
+    </p>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @ticket.phone %>
-</p>
+    <p>
+      <strong>Telefon:</strong>
+      <%= @ticket.phone %>
+    </p>
 
-<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
-<%= link_to 'Back', tickets_path %>
+    <p>
+      <strong>Numer miejsca:</strong>
+      <%= @ticket.seat_id_seq %>
+    </p>
+
+    <p>
+      <strong>Cena zakupu:</strong>
+      <%= @ticket.price %>
+    </p>
+  </div>
+</div>
+
+<div class="top-mg-150">
+  <%= button_to 'Powrót', tickets_path, class: 'btn btn-warning' %>
+</div>
