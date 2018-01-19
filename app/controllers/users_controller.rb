@@ -58,8 +58,16 @@ class UsersController < ApplicationController
 
   def charged
     @user = current_user
-    new_balance = @user.balance + params[:account_charge][:amount].to_d
-    print new_balance
+    amount = params[:account_charge][:amount]
+    check_code = params[:account_charge][:check_code]
+    account_charge = AccountCharge.new({:amount => amount, :check_code => check_code})
+    account_charge.validate
+    unless account_charge.valid?
+      @charge = account_charge
+      render 'users/charge', charge: @charge
+      return
+    end
+    new_balance = @user.balance + amount.to_d
     if @user.update_attribute(:balance, new_balance)
       respond_to do |format|
         format.html {redirect_to '/', notice: 'Konto zostało zasilone środkami'}

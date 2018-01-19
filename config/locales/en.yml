@@ -42,3 +42,11 @@ en:
         price_high: ""
         seats_rows: ""
         seats_columns: ""
+  activemodel:
+    model:
+      account_charge: ""
+    attributes:
+      account_charge:
+        amount: ""
+        check_code: ""
+
