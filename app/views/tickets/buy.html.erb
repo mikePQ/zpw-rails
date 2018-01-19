@@ -1,9 +1,19 @@
 <h1>Zakup biletu</h1>
 
 <div class="top-mg-50">
-  <% tickets = create_tickets(params) %>
-  <p><strong>Ilość biletów:</strong> <%= tickets.length %></p>
-  <p><strong>Łączna cena:</strong> <%= total_price(tickets) %></p>
+  <% seats = params[:seat_ids] %>
+  <% event = get_event(params[:event_id]) %>
+
+  <p><strong>Artysta:</strong> <%= event.artist %></p>
+  <p><strong>Data:</strong> <%= format_date(event.event_date) %></p>
+  <p><strong>Ilość biletów:</strong> <%= seats.length %></p>
+  <p>
+    <strong>Wybrane miejsca:</strong>
+    <% seats.each do |seat| %>
+      <%= seat + ' ' %>
+    <% end %>
+  </p>
+  <p><strong>Łączna cena:</strong> <%= total_price(seats) %></p>
 </div>
 
 <div class="form-wrapper">

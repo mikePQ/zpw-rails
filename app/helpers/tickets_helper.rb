@@ -10,17 +10,8 @@ module TicketsHelper
     100 #TODO
   end
 
-  def total_price(tickets)
-    100 #TODO implement
-  end
-
-  def create_tickets(params)
-    seats = params[:seat_ids]
-    print seats
-
-    event = params[:event_id]
-    print event
-
-    seats
+  def total_price(seats)
+    event_id = params[:event_id]
+    seats.length * ticket_price(event_id)
   end
 end

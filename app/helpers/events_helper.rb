@@ -14,5 +14,9 @@ module EventsHelper
   def is_archived(event)
     event.event_date.past?
   end
+
+  def get_event(event_id)
+    Event.find_by(:id => event_id)
+  end
 end
 
