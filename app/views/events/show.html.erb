@@ -13,13 +13,8 @@
     </h5>
 
     <h5>
-      <strong>Cena minimalna:</strong>
-      <%= @event.price_low %>
-    </h5>
-
-    <h5>
-      <strong>Cena maksymalna:</strong>
-      <%= @event.price_high %>
+      <strong>Cena biletu:</strong>
+      <%= ticket_price(@event.id) %>
     </h5>
 
     <h5>

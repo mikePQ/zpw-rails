@@ -20,15 +20,6 @@ class TicketsController < ApplicationController
   def show
   end
 
-  # GET /tickets/new
-  def new
-    @ticket = Ticket.new({:seat_id_seq => params[:seat_id_seq], :event_id => params[:event_id]})
-  end
-
-  # GET /tickets/1/edit
-  def edit
-  end
-
   # POST /tickets
   def create
     @ticket = Ticket.new(ticket_params)
@@ -46,17 +37,6 @@ class TicketsController < ApplicationController
         format.html {redirect_to @ticket, notice: 'Bilet został utworzony'}
       else
         format.html {render :new}
-      end
-    end
-  end
-
-  # PATCH/PUT /tickets/1
-  def update
-    respond_to do |format|
-      if @ticket.update(ticket_params)
-        format.html {redirect_to @ticket, notice: 'Bilet został zaktualizowany'}
-      else
-        format.html {render :edit}
       end
     end
   end
