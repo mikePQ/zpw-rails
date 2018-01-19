@@ -53,13 +53,15 @@
   <% end %>
 </div>
 
-<div class="top-mg-50">
-  <div class="row">
-    <div class="offset-8 col-md-4">
-      <button class="btn btn-warning w-100 buy-button">Kup bilety</button>
+<% if logged_in? %>
+  <div class="top-mg-50">
+    <div class="row">
+      <div class="offset-8 col-md-4">
+        <button class="btn btn-warning w-100 buy-button">Kup bilety</button>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
 
 <% if current_user&.admin %>
   <div class="top-mg-50">
@@ -83,8 +85,11 @@
   </div>
 </div>
 
-<div class="max-tickets" style="display: none">
-  <%= 5 - user_tickets(@event.tickets).length %>
-</div>
+<% if logged_in? %>
+  <div class="max-tickets" style="display: none">
+    <%= 5 - user_tickets(@event.tickets).length %>
+  </div>
+  <%= javascript_include_tag 'event', 'data-turbolinks-track': 'reload' %>
+<% end %>
 
-<%= javascript_include_tag 'event', 'data-turbolinks-track': 'reload' %>
+
