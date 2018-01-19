@@ -77,6 +77,9 @@ var SeatsManager = /** @class */ (function () {
     };
     SeatsManager.getMaxNumberOfTickets = function () {
         var element = document.getElementsByClassName("max-tickets")[0];
+        if (!element) {
+            return 5;
+        }
         return Number(element.textContent.replace(/\s+/g, ''));
     };
     return SeatsManager;

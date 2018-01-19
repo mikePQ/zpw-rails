@@ -1,5 +1,5 @@
 class TicketsController < ApplicationController
-  include TicketsHelper
+  include TicketsHelper, EventsHelper
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
   before_action :authorize
 
@@ -36,7 +36,7 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save
-        format.html {redirect_to @ticket, notice: 'Ticket was successfully created.'}
+        format.html {redirect_to @ticket, notice: 'Bilet został utworzony'}
       else
         format.html {render :new}
       end
@@ -47,7 +47,7 @@ class TicketsController < ApplicationController
   def update
     respond_to do |format|
       if @ticket.update(ticket_params)
-        format.html {redirect_to @ticket, notice: 'Ticket was successfully updated.'}
+        format.html {redirect_to @ticket, notice: 'Bilet został zaktualizowany'}
       else
         format.html {render :edit}
       end
@@ -58,7 +58,7 @@ class TicketsController < ApplicationController
   def destroy
     @ticket.destroy
     respond_to do |format|
-      format.html {redirect_to tickets_url, notice: 'Ticket was successfully destroyed.'}
+      format.html {redirect_to tickets_url, notice: 'Bilet został usunięty'}
       format.json {head :no_content}
     end
   end
@@ -77,9 +77,17 @@ class TicketsController < ApplicationController
     user_id = current_user.id
     price = ticket_price(event_id)
 
+    event = get_event(event_id)
+    max_tickets = 5 - user_tickets(event.tickets).length
+
+    counter = 0
     seat_ids.each do |seat|
+      if counter >= max_tickets
+        raise "Limit biletów na wydarzenie został wykorzystany";
+      end
       @ticket = Ticket.new({:seat_id_seq => seat, :event_id => event_id, :name => name, :email_address => email, :phone => phone, :user_id => user_id, :price => price, :address => address})
       @ticket.save
+      counter += 1
     end
   end
 
