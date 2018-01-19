@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get '/buy', to: 'tickets#buy'
   post '/buy', to: 'tickets#create_all'
+  post '/return', to: 'tickets#return'
 
   get '/signup', to: 'users#new'
   get '/charge', to: 'users#charge'

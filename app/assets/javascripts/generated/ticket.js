@@ -11,7 +11,6 @@ var TicketBuyForm = /** @class */ (function () {
         var url = new URL(window.location.href);
         var eventId = url.searchParams.get("event_id");
         var seatIds = url.searchParams.getAll("seat_ids[]");
-        console.log(confirmBuyButton);
         confirmBuyButton.addEventListener('click', function (event) {
             event.stopPropagation();
             ticketBuyForm.submitForm(eventId, seatIds);

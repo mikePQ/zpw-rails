@@ -114,6 +114,13 @@ class TicketsController < ApplicationController
     end
   end
 
+  def return
+    @ticket = Ticket.find(params[:id])
+    @ticket.update_attribute(:returned, true)
+
+    redirect_to "/tickets"
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_ticket

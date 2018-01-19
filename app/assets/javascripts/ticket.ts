@@ -13,7 +13,6 @@ class TicketBuyForm {
         let eventId = url.searchParams.get("event_id");
         let seatIds = url.searchParams.getAll("seat_ids[]");
 
-        console.log(confirmBuyButton);
         confirmBuyButton.addEventListener('click', (event) => {
             event.stopPropagation();
             ticketBuyForm.submitForm(eventId, seatIds);
@@ -183,3 +182,4 @@ class FormValidator {
 
 let validator = new FormValidator();
 let form = new TicketBuyForm(validator);
+
