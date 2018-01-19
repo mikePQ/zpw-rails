@@ -62,6 +62,14 @@
         <input type="text" id="phone" name="phone" class="w-100">
       </div>
     </div>
+    <% if event.adult_only %>
+      <div class="row field top-mg-35">
+        <div class="col-md-12">
+          <label for="adult">Potwierdzam, że jestem osobą pełnoletnią</label>
+          <input type="checkbox" id="adult">
+        </div>
+      </div>
+    <% end %>
   </form>
   <div class="row actions float-right">
     <button class="btn btn-warning confirm-buy-button">

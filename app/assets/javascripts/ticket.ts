@@ -22,7 +22,6 @@ class TicketBuyForm {
 
     submitForm(eventId: string, seatsIds: string[]) {
         let form = document.forms.namedItem("buy-form");
-        console.log(form);
 
         if (!validator.validate(form)) {
             alert(validator.messages[0]);
@@ -72,6 +71,10 @@ function getTextAreaValue(form: HTMLFormElement, elementName: string): string {
     return (<HTMLTextAreaElement>form.elements.namedItem(elementName)).value;
 }
 
+function getCheckboxValue(form: HTMLFormElement, elementName: string): boolean {
+    return (<HTMLInputElement>form.elements.namedItem(elementName)).checked;
+}
+
 function getUserBalance(): number {
     let element = document.getElementsByClassName("user-balance")[0];
     return Number(element.textContent.replace(/\s+/g, ''));
@@ -92,7 +95,63 @@ class FormValidator {
             return false;
         }
 
-        return true; //TODO implement
+        this.validateAdultCheckbox(form);
+        this.validateNameLength(form);
+        this.validateEmail(form);
+        this.validateAddress(form);
+        this.validatePhone(form);
+
+        return this.messages.length === 0;
+    }
+
+    private validateAdultCheckbox(form: HTMLFormElement) {
+        let adultCheckbox = form.elements.namedItem("adult");
+        if (!adultCheckbox) {
+            return true;
+        }
+
+        let value = getCheckboxValue(form, "adult");
+        if (!value) {
+            this.messages.push("Potwierdzenie pełnoletności jest wymagane do zakupu biletu na to wydarzenie");
+        }
+    }
+
+    private validateNameLength(form: HTMLFormElement) {
+        let value = getInputValue(form, "name");
+        if (value.length < 5) {
+            this.messages.push("Imię i nazwisko nie może być krótsze niż 5 znaków");
+        }
+    }
+
+    private validateEmail(form: HTMLFormElement) {
+        let email = getInputValue(form, "email");
+        let pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+
+        if (email.length < 5) {
+            this.messages.push("Email nie może być krótszy niż 5 znaków");
+        }
+
+        if (!pattern.test(email)) {
+            this.messages.push("Niepoprawny email");
+        }
+    }
+
+    private validatePhone(form: HTMLFormElement) {
+        let value = getInputValue(form, "phone");
+        if (value.length != 9) {
+            this.messages.push("Numer telefonu powinien zawierać 9 znaków");
+        }
+
+        if (!value.match(/\d/g)) {
+            this.messages.push("Niepoprawny numer telefonu");
+        }
+    }
+
+    private validateAddress(form: HTMLFormElement) {
+        let value = getInputValue(form, "address");
+        if (value.length < 10) {
+            this.messages.push("Adres nie może być krótszy niż 10 znaków");
+        }
     }
 }
 

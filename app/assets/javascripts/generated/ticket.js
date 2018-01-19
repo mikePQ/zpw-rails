@@ -19,7 +19,6 @@ var TicketBuyForm = /** @class */ (function () {
     };
     TicketBuyForm.prototype.submitForm = function (eventId, seatsIds) {
         var form = document.forms.namedItem("buy-form");
-        console.log(form);
         if (!validator.validate(form)) {
             alert(validator.messages[0]);
             return;
@@ -59,6 +58,9 @@ function getInputValue(form, elementName) {
 function getTextAreaValue(form, elementName) {
     return form.elements.namedItem(elementName).value;
 }
+function getCheckboxValue(form, elementName) {
+    return form.elements.namedItem(elementName).checked;
+}
 function getUserBalance() {
     var element = document.getElementsByClassName("user-balance")[0];
     return Number(element.textContent.replace(/\s+/g, ''));
@@ -77,7 +79,53 @@ var FormValidator = /** @class */ (function () {
             this.messages.push("Zbyt mała liczba środków na koncie");
             return false;
         }
-        return true; //TODO implement
+        this.validateAdultCheckbox(form);
+        this.validateNameLength(form);
+        this.validateEmail(form);
+        this.validateAddress(form);
+        this.validatePhone(form);
+        return this.messages.length === 0;
+    };
+    FormValidator.prototype.validateAdultCheckbox = function (form) {
+        var adultCheckbox = form.elements.namedItem("adult");
+        if (!adultCheckbox) {
+            return true;
+        }
+        var value = getCheckboxValue(form, "adult");
+        if (!value) {
+            this.messages.push("Potwierdzenie pełnoletności jest wymagane do zakupu biletu na to wydarzenie");
+        }
+    };
+    FormValidator.prototype.validateNameLength = function (form) {
+        var value = getInputValue(form, "name");
+        if (value.length < 5) {
+            this.messages.push("Imię i nazwisko nie może być krótsze niż 5 znaków");
+        }
+    };
+    FormValidator.prototype.validateEmail = function (form) {
+        var email = getInputValue(form, "email");
+        var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+        if (email.length < 5) {
+            this.messages.push("Email nie może być krótszy niż 5 znaków");
+        }
+        if (!pattern.test(email)) {
+            this.messages.push("Niepoprawny email");
+        }
+    };
+    FormValidator.prototype.validatePhone = function (form) {
+        var value = getInputValue(form, "phone");
+        if (value.length != 9) {
+            this.messages.push("Numer telefonu powinien zawierać 9 znaków");
+        }
+        if (!value.match(/\d/g)) {
+            this.messages.push("Niepoprawny numer telefonu");
+        }
+    };
+    FormValidator.prototype.validateAddress = function (form) {
+        var value = getInputValue(form, "address");
+        if (value.length < 10) {
+            this.messages.push("Adres nie może być krótszy niż 10 znaków");
+        }
     };
     return FormValidator;
 }());
