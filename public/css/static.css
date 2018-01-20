@@ -1,0 +1,123 @@
+body, html {
+    width: 100%;
+    height: 100%
+}
+
+body {
+    font-family: 'Lato'
+}
+
+.btn-xl {
+    padding: 1.25rem 2.5rem
+}
+
+.content-section {
+    padding-top: 7.5rem;
+    padding-bottom: 7.5rem
+}
+
+.content-section-heading h2 {
+    font-size: 3rem
+}
+
+.content-section-heading h3 {
+    font-size: 1rem;
+    text-transform: uppercase
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700
+}
+
+.text-faded {
+    color: rgba(255, 255, 255, .7)
+}
+
+.service-icon {
+    background-color: #fff;
+    color: #777777;
+    height: 7rem;
+    width: 7rem;
+    display: block;
+    line-height: 7.5rem;
+    font-size: 2.25rem;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, .1)
+}
+
+footer.footer {
+    padding-top: 5rem;
+    padding-bottom: 5rem
+}
+
+footer.footer .social-link {
+    display: block;
+    height: 4rem;
+    width: 4rem;
+    line-height: 4.3rem;
+    font-size: 1.5rem;
+    background-color: #FFB729;
+    transition: background-color .15s ease-in-out;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, .1)
+}
+
+footer.footer .social-link:hover {
+    background-color: #d67204;
+    text-decoration: none
+}
+
+a {
+    color: #FFB729
+}
+
+a:active, a:focus, a:hover {
+    color: #d67204
+}
+
+.btn-dark {
+    color: #fff !important
+}
+
+.btn {
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, .1);
+    font-weight: 700
+}
+
+.bg-primary {
+    background-color: #FFB729 !important
+}
+
+.navbar-brand {
+    font-size: 175%;
+    margin: 0 5% 0 1%;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.nav-link {
+    text-transform: uppercase;
+}
+
+.active {
+    font-weight: bold;
+}
+
+.form-inline {
+    margin-left: 1%;
+}
+
+header .btn {
+    border-radius: 0;
+}
+
+header .btn {
+    border-radius: 0;
+    font-weight: normal;
+}
+
+header .form-control {
+    border-radius: 0;
+}
+
+.top-mg-50 {
+    margin-top: 50px;
+}
