@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :authorize, only: [:edit, :update, :destroy]
 
   def index
     start_date = params[:start_date]
@@ -59,5 +60,11 @@ class EventsController < ApplicationController
   private
   def set_event
     @event = Event.find(params[:id])
+  end
+
+  def authorize
+    if current_user.nil?
+      redirect_to "/"
+    end
   end
 end
