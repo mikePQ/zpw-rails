@@ -33,6 +33,7 @@ en:
   activerecord:
     models:
       event: ""
+      user: ""
     attributes:
       event:
         artist: ""
@@ -42,6 +43,9 @@ en:
         price_high: ""
         seats_rows: ""
         seats_columns: ""
+      user:
+        email: ""
+        password: ""
   activemodel:
     model:
       account_charge: ""

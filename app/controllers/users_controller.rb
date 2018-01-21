@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authorize, only: [:show, :edit, :update, :destroy, :index, :charge]
 
   # GET /users
   def index
@@ -26,7 +27,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         log_in @user
-        format.html {redirect_to '/', notice: 'Rejestracja zakończona pomyślnie'}
+        format.html {redirect_to '/events', notice: 'Rejestracja zakończona pomyślnie'}
       else
         format.html {render :new}
       end
@@ -70,7 +71,7 @@ class UsersController < ApplicationController
     new_balance = @user.balance + amount.to_d
     if @user.update_attribute(:balance, new_balance)
       respond_to do |format|
-        format.html {redirect_to '/', notice: 'Konto zostało zasilone środkami'}
+        format.html {redirect_back fallback_location: '/charge', notice: 'Konto zostało zasilone środkami'}
       end
     end
   end
@@ -79,6 +80,12 @@ class UsersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def authorize
+    if current_user.nil?
+      redirect_to "/"
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

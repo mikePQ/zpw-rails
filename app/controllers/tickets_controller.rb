@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
   include TicketsHelper, EventsHelper, UsersHelper
-  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+  before_action :set_ticket, only: [:show, :destroy]
   before_action :authorize
 
   # GET /tickets
